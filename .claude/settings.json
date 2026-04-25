@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm check *)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(9\\).toString\\('base64'\\).replace\\(/[+/=]/g,''\\)\\)\")",
+      "Bash(pnpm install *)",
+      "Bash(git init *)",
+      "Bash(git branch *)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
+    ]
+  }
+}
