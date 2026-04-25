@@ -52,28 +52,28 @@
 :root {
   --radius: 26px;
 
-  --ink: oklch(0.18 0.01 255);
-  --paper: oklch(0.988 0.006 85);
+  --ink: oklch(0.18 0.01 60);
+  --paper: oklch(0.945 0.018 85);
   --press: oklch(0.50 0.14 265);
 
-  --primary: oklch(0.18 0.01 255);
-  --primary-foreground: oklch(0.995 0.002 85);
-  --secondary: oklch(0.968 0.006 85);
-  --secondary-foreground: oklch(0.18 0.01 255);
-  --background: oklch(0.988 0.006 85);
-  --foreground: oklch(0.18 0.01 255);
-  --card: oklch(0.995 0.004 85);
-  --card-foreground: oklch(0.18 0.01 255);
-  --popover: oklch(0.995 0.004 85);
-  --popover-foreground: oklch(0.18 0.01 255);
-  --muted: oklch(0.966 0.006 85);
-  --muted-foreground: oklch(0.48 0.01 255);
-  --accent: oklch(0.972 0.008 85);
-  --accent-foreground: oklch(0.18 0.01 255);
+  --primary: oklch(0.18 0.01 60);
+  --primary-foreground: oklch(0.96 0.012 85);
+  --secondary: oklch(0.92 0.018 85);
+  --secondary-foreground: oklch(0.18 0.01 60);
+  --background: oklch(0.945 0.018 85);
+  --foreground: oklch(0.18 0.01 60);
+  --card: oklch(0.965 0.015 85);
+  --card-foreground: oklch(0.18 0.01 60);
+  --popover: oklch(0.965 0.015 85);
+  --popover-foreground: oklch(0.18 0.01 60);
+  --muted: oklch(0.92 0.018 85);
+  --muted-foreground: oklch(0.42 0.012 60);
+  --accent: oklch(0.92 0.018 85);
+  --accent-foreground: oklch(0.18 0.01 60);
   --destructive: oklch(0.50 0.14 265);
   --destructive-foreground: oklch(0.995 0.002 85);
-  --border: oklch(0.9 0.005 85);
-  --input: oklch(0.994 0.004 85);
+  --border: oklch(0.78 0.012 60);
+  --input: oklch(0.96 0.015 85);
   --ring: oklch(0.50 0.14 265);
 
   --sidebar: oklch(0.982 0.005 85);
@@ -347,7 +347,12 @@ html.dark.high-contrast {
     font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif;
   }
   .font-display {
-    font-family: "Space Grotesk", "Manrope", sans-serif;
+    font-family: "Playfair Display", "DM Serif Display", Georgia, serif;
+  }
+  .font-headline {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
   .font-ui {
     font-family:

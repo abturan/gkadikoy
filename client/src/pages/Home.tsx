@@ -420,19 +420,19 @@ function PopularMiniCard({
 }) {
   return (
     <Link href={`/haber/${article.slug}`} className={cn("group block", tiltClass)}>
-      <article className="grid gap-3 rounded-[0.8rem] border-4 border-black bg-[#f9ff4f] p-2 shadow-[8px_8px_0_#ff2ea6] transition-all duration-200 sm:grid-cols-[124px_1fr] group-hover:-translate-y-1">
-        <div className="relative overflow-hidden border-2 border-black bg-white">
+      <article className="grid gap-3 rounded-[0.8rem] border-4 border-black bg-[repeating-linear-gradient(45deg,#f9ff4f_0px,#f9ff4f_10px,#ff6bcb_10px,#ff6bcb_20px)] p-2 shadow-[8px_8px_0_#0048ff] transition-all duration-200 sm:grid-cols-[124px_1fr] group-hover:-translate-y-1">
+        <div className="relative overflow-hidden border-2 border-black bg-white ring-2 ring-[#18ff00]">
           {article.imageUrl ? (
             <img
               src={article.imageUrl}
               alt={article.title}
-              className="aspect-square h-full w-full object-cover saturate-200 transition-transform duration-300 group-hover:scale-[1.08]"
+              className="aspect-square h-full w-full object-cover saturate-200 contrast-125 transition-transform duration-300 group-hover:scale-[1.08]"
             />
           ) : (
             <div className="aspect-square bg-[#d1d5db]" />
           )}
         </div>
-        <div className="min-w-0 rounded-[0.45rem] border-2 border-black bg-[#00d4ff] p-2">
+        <div className="min-w-0 rounded-[0.45rem] border-2 border-black bg-[#00d4ff] p-2 ring-2 ring-black/40">
           <h4 className="font-mono text-[0.9rem] font-black leading-[1.15] uppercase tracking-[-0.01em] text-black transition-colors group-hover:text-[#7300ff]">
             {article.title}
           </h4>
@@ -750,14 +750,19 @@ export default function Home() {
           )}
 
           {kulturLead ? (
-            <section className="mb-12 overflow-hidden rounded-[1.2rem] border-4 border-black bg-[repeating-linear-gradient(135deg,#ff006e_0px,#ff006e_14px,#ffe600_14px,#ffe600_28px,#00e5ff_28px,#00e5ff_42px)] px-4 py-5 shadow-[0_0_0_4px_#0015ff] md:px-6 md:py-6">
+            <section className="mb-12 overflow-hidden rounded-[1.2rem] border-4 border-black bg-[repeating-linear-gradient(135deg,#ff006e_0px,#ff006e_12px,#ffe600_12px,#ffe600_24px,#00e5ff_24px,#00e5ff_36px,#7fff00_36px,#7fff00_48px)] px-4 py-5 shadow-[0_0_0_4px_#0015ff] md:px-6 md:py-6">
+              <div className="mb-4 overflow-hidden border-2 border-black bg-[#adff2f]">
+                <p className="whitespace-nowrap px-3 py-1 font-mono text-[0.62rem] font-black uppercase tracking-[0.18em] text-black animate-pulse">
+                  Dikkat: Bu blok bilinçli olarak göz yorar. Renk dengesi kapatıldı.
+                </p>
+              </div>
               <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                <h2 className="bg-black px-3 py-2 font-mono text-[0.88rem] font-black uppercase tracking-[0.2em] text-[#fff056] sm:text-[1.05rem]">
-                  Kültür Sanat / Kadıköy Etkinlikleri / Göz Yakan Mod
+                <h2 className="bg-black px-3 py-2 font-mono text-[0.82rem] font-black uppercase tracking-[0.24em] text-[#fff056] sm:text-[1.05rem]">
+                  Kültür Sanat / Kadıköy Etkinlikleri / Aşırı Doygun Mod
                 </h2>
                 <Link
                   href="/etkinlikler"
-                  className="inline-flex items-center gap-2 border-2 border-black bg-[#00ffd5] px-3 py-2 font-mono text-[0.68rem] font-black uppercase tracking-[0.14em] text-black transition-colors hover:bg-[#651fff] hover:text-white"
+                  className="inline-flex items-center gap-2 border-2 border-black bg-[#fffb00] px-3 py-2 font-mono text-[0.68rem] font-black uppercase tracking-[0.14em] text-black transition-colors hover:bg-[#651fff] hover:text-white"
                 >
                   Tüm Etkinlikler <ArrowUpRight className="h-4 w-4" />
                 </Link>
@@ -767,36 +772,36 @@ export default function Home() {
                 href={`/haber/${kulturLead.slug}`}
                 className="group block"
               >
-                <article className="grid gap-4 rounded-[0.9rem] border-4 border-black bg-[#ff6464] p-3 shadow-[10px_10px_0_#1f1147] md:grid-cols-[1.1fr_0.9fr] md:items-stretch">
+                <article className="grid gap-4 rounded-[0.9rem] border-4 border-black bg-[#ff6464] p-3 shadow-[10px_10px_0_#1f1147] md:grid-cols-[0.95fr_1.05fr] md:items-stretch">
                   <div className="overflow-hidden border-4 border-black bg-[#fff15f]">
                     {kulturLead.imageUrl ? (
                       <img
                         src={kulturLead.imageUrl}
                         alt={kulturLead.title}
-                        className="aspect-[4/3] h-full w-full object-cover saturate-200 contrast-125 transition-transform duration-300 group-hover:scale-[1.06]"
+                        className="aspect-[4/3] h-full w-full object-cover saturate-200 contrast-125 brightness-110 transition-transform duration-300 group-hover:scale-[1.08]"
                       />
                     ) : (
                       <div className="aspect-[4/3] bg-[#fff15f]" />
                     )}
                   </div>
 
-                  <div className="min-w-0 rounded-[0.7rem] border-4 border-black bg-[#3cf2ff] p-4">
+                  <div className="min-w-0 rounded-[0.7rem] border-4 border-black bg-[#3cf2ff] p-4 ring-2 ring-[#ff00a8]">
                     <div className="inline-flex items-center gap-2 border-2 border-black bg-[#ffe800] px-3 py-1 font-mono text-[0.66rem] font-black uppercase tracking-[0.16em] text-black animate-pulse">
                       Kültür Sanat
                     </div>
-                    <h3 className="mt-3 font-mono text-[1.3rem] font-black leading-[1.08] uppercase tracking-[-0.02em] text-black sm:text-[1.65rem] xl:text-[1.85rem]">
+                    <h3 className="mt-3 font-mono text-[1.4rem] font-black leading-[1.05] uppercase tracking-[-0.025em] text-black sm:text-[1.7rem] xl:text-[1.95rem]">
                       {kulturLead.title}
                     </h3>
                     {kulturLead.summary && (
-                      <p className="mt-3 font-serif text-[0.95rem] leading-[1.35] text-black/88 line-clamp-3">
+                      <p className="mt-3 font-serif text-[0.95rem] leading-[1.35] tracking-[0.01em] text-black/88 line-clamp-3">
                         {kulturLead.summary}
                       </p>
                     )}
                     <div className="mt-4 flex flex-wrap items-center gap-2 border-t-2 border-black pt-3 font-mono text-[0.66rem] font-bold uppercase tracking-[0.08em] text-black">
-                      <span className="bg-black px-2 py-1 text-white">
+                      <span className="bg-black px-2 py-1 text-[#adff2f]">
                         {kulturLeadAuthor?.name ?? "Editör Masası"}
                       </span>
-                      <span>{formatDateTr(kulturLead.publishedAt)}</span>
+                      <span className="bg-white/80 px-2 py-1">{formatDateTr(kulturLead.publishedAt)}</span>
                     </div>
                   </div>
                 </article>
@@ -811,10 +816,10 @@ export default function Home() {
                       authorMap={authorMap}
                       tiltClass={
                         idx % 3 === 0
-                          ? "rotate-0"
+                          ? "rotate-1"
                           : idx % 3 === 1
-                            ? "-rotate-1"
-                            : "rotate-1"
+                            ? "-rotate-2"
+                            : "rotate-2"
                       }
                     />
                   ))}

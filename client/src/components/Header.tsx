@@ -110,10 +110,40 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-40 border-b border-white/30 bg-white/45 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_1px_0_rgba(255,255,255,0.55)_inset,0_8px_28px_rgba(15,15,15,0.06)] supports-[backdrop-filter]:bg-white/35 transition-all duration-300",
-          scrolled && "bg-white/65 supports-[backdrop-filter]:bg-white/55"
+          "sticky top-0 z-40 border-b border-foreground/30 bg-background transition-all duration-300",
+          scrolled && "shadow-[0_2px_0_rgba(0,0,0,0.04)]"
         )}
       >
+        {!scrolled && (
+          <div className="border-b border-foreground/20">
+            <div className="container flex items-center gap-4 py-3">
+              <Link href="/" className="flex shrink-0 items-center gap-2">
+                <img
+                  src={logoUrl}
+                  alt="Gazete Kadıköy"
+                  className="h-7 w-auto object-contain"
+                />
+              </Link>
+              <div className="hidden h-6 w-px bg-foreground/20 sm:block" />
+              <div className="hidden text-[0.7rem] font-ui font-semibold uppercase tracking-[0.16em] text-foreground/60 sm:block">
+                {new Date().toLocaleDateString("tr-TR", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </div>
+              <h1 className="font-headline mx-auto truncate text-center text-[1.6rem] font-black tracking-[-0.01em] text-foreground sm:text-[2.2rem] md:text-[2.6rem]">
+                Gazete Kadıköy
+              </h1>
+              <Link
+                href="/admin/articles/new"
+                className="hidden shrink-0 items-center gap-2 rounded-full border border-foreground/30 px-4 py-2 text-[0.78rem] font-ui font-semibold uppercase tracking-[0.12em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:inline-flex"
+              >
+                Yazı Yaz
+              </Link>
+            </div>
+          </div>
+        )}
         <div className="container">
           <div
             className={cn(
