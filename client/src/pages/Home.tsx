@@ -578,44 +578,50 @@ export default function Home() {
 
       <main className="relative z-10 overflow-hidden">
         <div className="container pb-10 md:pb-12">
-          <section className="pb-10">
+          <section className="pt-8 pb-10">
             {bannerArticle && (
               <Link
                 href={`/haber/${bannerArticle.slug}`}
-                className="group relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] block w-screen overflow-hidden"
+                className="group block"
               >
-                <div className="relative h-[58vh] min-h-[420px] w-full md:h-[68vh]">
-                  {bannerArticle.imageUrl ? (
-                    <img
-                      src={bannerArticle.imageUrl}
-                      alt={bannerArticle.title}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-muted" />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/15" />
-                  <div className="container relative flex h-full items-end pb-12 md:pb-16">
-                    <div className="max-w-4xl text-white">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-press/95 px-4 py-1.5 text-[0.7rem] font-ui font-bold uppercase tracking-[0.18em] text-white">
-                        <Sparkles className="h-3.5 w-3.5" />
+                <article className="grid overflow-hidden border border-foreground/85 bg-card md:grid-cols-[1.05fr_1fr]">
+                  <div className="flex min-h-[18rem] flex-col justify-center p-6 sm:p-9 md:p-12 lg:p-14">
+                    <div className="flex items-center gap-3">
+                      <span className="h-[2px] w-10 bg-press" />
+                      <span className="font-ui text-[0.7rem] font-bold uppercase tracking-[0.22em] text-press">
                         {categoryMap[bannerArticle.categoryId]?.name ?? "Manşet"}
-                      </div>
-                      <h1 className="mt-5 font-ui text-[2.25rem] font-extrabold leading-[1.02] tracking-[-0.05em] text-white sm:text-[3.4rem] md:text-[4.2rem]">
-                        {bannerArticle.title}
-                      </h1>
-                      {bannerArticle.summary && (
-                        <p className="mt-5 max-w-2xl font-ui text-[1rem] leading-[1.65] text-white/85 md:text-[1.08rem]">
-                          {bannerArticle.summary}
-                        </p>
-                      )}
-                      <div className="mt-6 inline-flex items-center gap-2 font-ui text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-white/90 transition-colors group-hover:text-white">
-                        Haberi oku
+                      </span>
+                    </div>
+                    <h1 className="mt-5 font-headline text-[2rem] leading-[1.04] tracking-[-0.02em] text-foreground sm:text-[2.6rem] md:text-[3rem] lg:text-[3.4rem]">
+                      {bannerArticle.title}
+                    </h1>
+                    {bannerArticle.summary && (
+                      <p className="mt-5 max-w-[36rem] font-serif text-[1rem] leading-[1.6] text-foreground/72 md:text-[1.08rem]">
+                        {bannerArticle.summary}
+                      </p>
+                    )}
+                    <div className="mt-8 flex items-center justify-between gap-4 border-t border-foreground/15 pt-5">
+                      <span className="font-ui text-[0.7rem] font-bold uppercase tracking-[0.2em] text-foreground/55">
+                        {formatDateTr(bannerArticle.publishedAt)}
+                      </span>
+                      <span className="inline-flex items-center gap-2 font-serif italic text-[0.95rem] text-foreground transition-colors group-hover:text-press">
+                        Devamını oku
                         <ArrowUpRight className="h-4 w-4" />
-                      </div>
+                      </span>
                     </div>
                   </div>
-                </div>
+                  <div className="order-first overflow-hidden bg-muted md:order-last">
+                    {bannerArticle.imageUrl ? (
+                      <img
+                        src={bannerArticle.imageUrl}
+                        alt={bannerArticle.title}
+                        className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] md:aspect-auto md:min-h-[26rem]"
+                      />
+                    ) : (
+                      <div className="aspect-[4/3] bg-muted md:aspect-auto md:min-h-[26rem]" />
+                    )}
+                  </div>
+                </article>
               </Link>
             )}
 
