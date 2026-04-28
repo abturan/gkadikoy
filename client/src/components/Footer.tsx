@@ -21,7 +21,7 @@ export default function Footer() {
               Tüm hakları saklıdır
             </div>
             <p className="mt-1 font-serif text-[0.95rem] text-foreground/80">
-              © Gazete Kadıköy {year}
+              © <span className="bg-foreground text-transparent select-none rounded-sm px-1">Gazete Kadıköy</span> {year}
             </p>
           </div>
           <div className="text-center">
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         <div className="relative mt-8 flex items-end gap-4 overflow-hidden">
-          <Link href="/" className="shrink-0">
+          <Link href="/" className="hidden shrink-0">
             <img
               src={logoUrl}
               alt="Gazete Kadıköy"
@@ -51,7 +51,7 @@ export default function Footer() {
             />
           </Link>
           <div className="font-headline flex-1 truncate text-[18vw] font-black leading-[0.8] tracking-[-0.06em] text-foreground md:text-[14vw]">
-            Gazete Kadıköy
+            <span className="bg-foreground text-transparent select-none rounded-sm px-2">Gazete Kadıköy</span>
           </div>
         </div>
 

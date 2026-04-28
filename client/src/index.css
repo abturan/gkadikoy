@@ -51,6 +51,14 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
   --radius: 26px;
+  --kadikoy-blue: #34588a;
+  --kadikoy-blue-dark: #2a4771;
+  --kadikoy-blue-soft: #ebeff5;
+  --kadikoy-blue-soft-dark: color-mix(
+    in oklch,
+    var(--kadikoy-blue) 28%,
+    transparent
+  );
 
   --ink: oklch(0.18 0.01 60);
   --paper: oklch(0.945 0.018 85);
@@ -96,6 +104,12 @@
    DARK THEME — Deep charcoal · soft white · orange CTA
    ═══════════════════════════════════════════════════════════════════════════ */
 .dark {
+  --kadikoy-blue-soft-dark: color-mix(
+    in oklch,
+    var(--kadikoy-blue) 34%,
+    transparent
+  );
+
   --ink: oklch(0.96 0.004 85);
   --paper: oklch(0.13 0.005 255);
   --press: oklch(0.73 0.19 40);
@@ -495,6 +509,21 @@ html.dark.high-contrast {
     animation: pulseGlow 1.8s ease-out infinite;
   }
 
+  @keyframes searchPeek {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      transform: translateY(2px) scale(1.18);
+    }
+  }
+  .animate-search-peek {
+    animation: searchPeek 1.6s ease-in-out infinite;
+  }
+
   /* ─── Gradient overlay for hero images ─── */
   .gradient-overlay {
     background: linear-gradient(
@@ -792,10 +821,11 @@ html.dark.high-contrast {
 @layer components {
   .container {
     width: 100%;
+    max-width: none;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: clamp(0.75rem, 1.6vw, 2.25rem);
+    padding-right: clamp(0.75rem, 1.6vw, 2.25rem);
   }
 
   .flex {
@@ -805,15 +835,20 @@ html.dark.high-contrast {
 
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      padding-left: clamp(1rem, 2vw, 2.75rem);
+      padding-right: clamp(1rem, 2vw, 2.75rem);
     }
   }
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2.25rem;
-      padding-right: 2.25rem;
-      max-width: 1280px;
+      padding-left: clamp(1.25rem, 2.3vw, 4rem);
+      padding-right: clamp(1.25rem, 2.3vw, 4rem);
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      padding-left: clamp(2rem, 2.8vw, 5rem);
+      padding-right: clamp(2rem, 2.8vw, 5rem);
     }
   }
 

@@ -21,7 +21,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   sergi: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
   tiyatro: "bg-red-500/10 text-red-600 dark:text-red-400",
   festival: "bg-pink-500/10 text-pink-600 dark:text-pink-400",
-  sinema: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+  sinema: "bg-[var(--kadikoy-blue-soft)] dark:bg-[var(--kadikoy-blue-soft-dark)] text-[var(--kadikoy-blue)] dark:text-[var(--kadikoy-blue)]",
   spor: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
   diger: "bg-gray-500/10 text-gray-600 dark:text-gray-400",
 };

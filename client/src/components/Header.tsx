@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Contrast, Menu, Moon, Search, Sun, X } from "lucide-react";
+import { ChevronDown, Contrast, Menu, Moon, Search, Sun, X } from "lucide-react";
+import kadikoyLogoUrl from "../../assets/logo.png";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { trpc } from "@/lib/trpc";
@@ -134,6 +135,8 @@ export default function Header() {
   const tool =
     "inline-flex h-8 min-w-8 items-center justify-center border border-foreground/30 bg-background px-2 text-foreground/72 transition-colors hover:border-foreground hover:text-foreground";
 
+  const drawerExpanded = !scrolled || searchOpen;
+
   return (
     <>
       <header className="sticky top-0 z-40 bg-background">
@@ -200,20 +203,22 @@ export default function Header() {
               <div className="h-[3px] bg-foreground" />
               <div className="mt-1 h-px bg-foreground/40" />
             </div>
-            <div className="container py-6 md:py-8">
-              <div className="grid items-center gap-4 sm:grid-cols-[1fr_auto_1fr]">
-                <div className="hidden font-ui text-[0.7rem] font-bold uppercase tracking-[0.22em] text-foreground/55 sm:block">
+            <div className="container pt-5 pb-6 md:pt-7 md:pb-8">
+              <div className="hidden items-center justify-between gap-4 pb-3 sm:flex">
+                <span className="font-ui text-[0.7rem] font-bold uppercase tracking-[0.22em] text-foreground/55">
                   Kadıköy · İstanbul
-                </div>
-                <Link href="/" className="block text-center" onClick={closePanels}>
-                  <span className="font-headline block leading-[0.92] tracking-[-0.025em] text-foreground text-[2.4rem] sm:text-[3.4rem] md:text-[4.4rem]">
-                    Gazete Kadıköy
-                  </span>
-                </Link>
-                <div className="hidden text-right font-ui text-[0.7rem] font-bold uppercase tracking-[0.22em] text-foreground/55 sm:block">
+                </span>
+                <span className="font-ui text-[0.7rem] font-bold uppercase tracking-[0.22em] text-foreground/55">
                   Bağımsız Yerel Yayın
-                </div>
+                </span>
               </div>
+              <Link href="/" className="block" onClick={closePanels}>
+                <img
+                  src={kadikoyLogoUrl}
+                  alt="Gazete Kadıköy"
+                  className="h-14 w-auto max-w-full object-contain sm:h-16 md:h-20 lg:h-24"
+                />
+              </Link>
             </div>
             <div className="container">
               <div className="h-px bg-foreground/40" />
@@ -235,9 +240,13 @@ export default function Header() {
               <Link
                 href="/"
                 onClick={closePanels}
-                className="font-headline shrink-0 text-[1.2rem] leading-none tracking-[-0.02em] text-foreground"
+                className="shrink-0"
               >
-                Gazete Kadıköy
+                <img
+                  src={kadikoyLogoUrl}
+                  alt="Gazete Kadıköy"
+                  className="h-7 w-auto object-contain"
+                />
               </Link>
             )}
 
@@ -274,110 +283,6 @@ export default function Header() {
             </div>
 
             <div className="ml-auto flex items-center gap-2">
-              <div className="relative" ref={searchRef}>
-                <button
-                  onClick={() => {
-                    setSearchOpen(open => !open);
-                    setMobileOpen(false);
-                  }}
-                  className={cn(
-                    tool,
-                    searchOpen && "border-foreground bg-foreground text-background"
-                  )}
-                  aria-label="Ara"
-                >
-                  <Search className="h-4 w-4" />
-                </button>
-
-                {searchOpen ? (
-                  <div className="absolute right-0 top-full z-50 mt-2 w-[min(34rem,calc(100vw-2rem))] border border-foreground/85 bg-card p-3 shadow-[0_18px_44px_rgba(0,0,0,0.12)]">
-                    <form
-                      onSubmit={handleSearchSubmit}
-                      className="border border-foreground/30 bg-background px-4 py-3"
-                    >
-                      <div className="flex items-center gap-3">
-                        <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <input
-                          ref={inputRef}
-                          type="text"
-                          value={searchQuery}
-                          onChange={event => setSearchQuery(event.target.value)}
-                          placeholder="Haber, semt, yazar ya da konu ara"
-                          className="flex-1 bg-transparent font-ui text-sm text-foreground outline-none placeholder:text-muted-foreground"
-                        />
-                        {searchQuery ? (
-                          <button
-                            type="button"
-                            onClick={() => setSearchQuery("")}
-                            className="flex h-7 w-7 items-center justify-center border border-foreground/25 text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
-                            aria-label="Aramayı temizle"
-                          >
-                            <X className="h-3.5 w-3.5" />
-                          </button>
-                        ) : null}
-                      </div>
-                    </form>
-
-                    <div className="mt-3 border border-foreground/20 bg-background">
-                      {debouncedQuery.length >= 2 ? (
-                        searchResults && searchResults.length > 0 ? (
-                          <>
-                            {searchResults.map(article => (
-                              <button
-                                key={article.id}
-                                type="button"
-                                onClick={() => openArticle(article.slug)}
-                                className="grid w-full gap-3 border-b border-foreground/10 p-4 text-left transition-colors hover:bg-muted/40 sm:grid-cols-[96px_1fr]"
-                              >
-                                {article.imageUrl ? (
-                                  <img
-                                    src={article.imageUrl}
-                                    alt=""
-                                    className="h-20 w-full object-cover sm:w-24"
-                                  />
-                                ) : (
-                                  <div className="hidden h-20 bg-muted sm:block" />
-                                )}
-
-                                <div className="min-w-0">
-                                  <div className="line-clamp-2 font-headline text-[1rem] font-bold leading-[1.2] tracking-[-0.02em] text-foreground">
-                                    {article.title}
-                                  </div>
-                                  <div className="mt-2 font-ui text-[0.74rem] text-muted-foreground">
-                                    {timeAgo(article.publishedAt)}
-                                  </div>
-                                </div>
-                              </button>
-                            ))}
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const value = searchQuery.trim();
-                                if (!value) return;
-                                navigate(`/arama?q=${encodeURIComponent(value)}`);
-                                setSearchQuery("");
-                                closePanels();
-                              }}
-                              className="w-full border-t border-foreground/15 px-4 py-3 text-center font-ui text-[0.72rem] font-bold uppercase tracking-[0.18em] text-press transition-colors hover:bg-muted/40"
-                            >
-                              Tüm sonuçları gör
-                            </button>
-                          </>
-                        ) : (
-                          <div className="px-6 py-8 text-center font-serif italic text-sm text-muted-foreground">
-                            Sonuç bulunamadı
-                          </div>
-                        )
-                      ) : (
-                        <div className="px-6 py-8 text-center font-serif italic text-sm text-muted-foreground">
-                          Aramak için en az 2 karakter girin
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-
               <button
                 onClick={() => {
                   setMobileOpen(open => !open);
@@ -394,6 +299,120 @@ export default function Header() {
               </button>
             </div>
           </div>
+        </div>
+
+        <div
+          ref={searchRef}
+          className="relative overflow-hidden bg-background"
+        >
+          <div
+            className={cn(
+              "transition-all duration-300 ease-out",
+              drawerExpanded
+                ? "max-h-[80vh] border-b border-foreground/15 opacity-100"
+                : "pointer-events-none max-h-0 border-b-0 opacity-0"
+            )}
+          >
+            <div className="container py-3">
+              <form
+                onSubmit={handleSearchSubmit}
+                className="flex items-center gap-3 border border-foreground/30 bg-card px-4 py-2.5"
+              >
+                <Search className="h-4 w-4 shrink-0 text-foreground/55" />
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={searchQuery}
+                  onChange={event => setSearchQuery(event.target.value)}
+                  placeholder="Haber, semt, yazar ya da konu ara"
+                  className="flex-1 bg-transparent font-ui text-sm text-foreground outline-none placeholder:text-muted-foreground"
+                />
+                {searchQuery ? (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="flex h-7 w-7 items-center justify-center border border-foreground/25 text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+                    aria-label="Aramayı temizle"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                ) : null}
+                <button
+                  type="submit"
+                  className="shrink-0 border border-foreground bg-foreground px-3 py-1.5 font-ui text-[0.7rem] font-bold uppercase tracking-[0.16em] text-background transition-colors hover:bg-background hover:text-foreground"
+                >
+                  Ara
+                </button>
+              </form>
+
+              {debouncedQuery.length >= 2 ? (
+                <div className="mt-3 max-h-[55vh] overflow-y-auto border border-foreground/20 bg-background">
+                  {searchResults && searchResults.length > 0 ? (
+                    <>
+                      {searchResults.map(article => (
+                        <button
+                          key={article.id}
+                          type="button"
+                          onClick={() => openArticle(article.slug)}
+                          className="grid w-full gap-3 border-b border-foreground/10 p-4 text-left transition-colors hover:bg-muted/40 sm:grid-cols-[96px_1fr]"
+                        >
+                          {article.imageUrl ? (
+                            <img
+                              src={article.imageUrl}
+                              alt=""
+                              className="h-20 w-full object-cover sm:w-24"
+                            />
+                          ) : (
+                            <div className="hidden h-20 bg-muted sm:block" />
+                          )}
+                          <div className="min-w-0">
+                            <div className="line-clamp-2 font-headline text-[1rem] font-bold leading-[1.2] tracking-[-0.02em] text-foreground">
+                              {article.title}
+                            </div>
+                            <div className="mt-2 font-ui text-[0.74rem] text-muted-foreground">
+                              {timeAgo(article.publishedAt)}
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const value = searchQuery.trim();
+                          if (!value) return;
+                          navigate(`/arama?q=${encodeURIComponent(value)}`);
+                          setSearchQuery("");
+                          closePanels();
+                        }}
+                        className="w-full border-t border-foreground/15 px-4 py-3 text-center font-ui text-[0.72rem] font-bold uppercase tracking-[0.18em] text-press transition-colors hover:bg-muted/40"
+                      >
+                        Tüm sonuçları gör
+                      </button>
+                    </>
+                  ) : (
+                    <div className="px-6 py-6 text-center font-serif italic text-sm text-muted-foreground">
+                      Sonuç bulunamadı
+                    </div>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            className={cn(
+              "group flex w-full items-center justify-center gap-2 transition-all duration-300 ease-out",
+              drawerExpanded
+                ? "pointer-events-none h-0 overflow-hidden opacity-0"
+                : "h-5 border-b border-foreground/85 opacity-100"
+            )}
+            aria-label="Aramayı aç"
+          >
+            <Search className="animate-search-peek h-3 w-3 text-foreground/55 group-hover:text-foreground" />
+            <ChevronDown className="animate-search-peek h-3.5 w-3.5 text-foreground/60 group-hover:text-foreground" />
+          </button>
         </div>
       </header>
 

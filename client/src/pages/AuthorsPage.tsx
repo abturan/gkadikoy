@@ -23,7 +23,7 @@ export default function AuthorsPage() {
             </div>
             <div>
               <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground">Yazarlar</h1>
-              <p className="text-muted-foreground text-sm mt-0.5">Gazete Kadıköy yazarları ve köşe yazıları</p>
+              <p className="text-muted-foreground text-sm mt-0.5"><span className="bg-foreground text-transparent select-none rounded-sm px-1">Gazete Kadıköy</span> yazarları ve köşe yazıları</p>
             </div>
           </div>
         </div>
